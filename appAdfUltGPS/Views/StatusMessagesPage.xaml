@@ -1,0 +1,88 @@
+﻿<Page
+    x:Class="appAdfUltGPS.Views.StatusMessagesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:appAdfUltGPS.Views"
+    xmlns:vm="using:appAdfUltGPS.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"  Width="800" Height="480">
+
+    <Page.Resources>
+        <vm:IntToStatusImageConverter x:Key="ImageConverter"/>
+    </Page.Resources>
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <!-- <SlideNavigationTransitionInfo/>  -->
+                    <CommonNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition FromHorizontalOffset="480" />
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0,0" Stroke="Black" Grid.RowSpan="2" d:LayoutOverrides="TopPosition, BottomPosition">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFDFF939" Offset="0.000"/>
+                    <GradientStop Color="#FFF35850" Offset="1.000"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <TextBlock  Grid.Row="0" Grid.RowSpan="1"
+    		Grid.Column="0" Grid.ColumnSpan="3"
+    		HorizontalAlignment="Center" Text="Status Messages" Margin="0,5,0,0" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" />
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,5,5,5" Orientation="Horizontal" HorizontalAlignment="Left" >
+            <AppBarButton x:Name="appBarButtonLeft" HorizontalAlignment="Left" Icon="Back" Label="" VerticalAlignment="Center" Width="44" Height="45" Click="appBarButtonLeft_Click"/>
+            <TextBlock Text="Send Commands" Style="{ThemeResource SubheaderTextBlockStyle}" Margin="0,0,0,0" VerticalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="2" Margin="5,5,20,5" Orientation="Horizontal" HorizontalAlignment="Right" Width="Auto">
+            <TextBlock Text="Configuration" Style="{ThemeResource SubheaderTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,0,0" />
+            <AppBarButton x:Name="appBarButtonRight" HorizontalAlignment="Left" Icon="Forward" Label="" VerticalAlignment="Center" Width="45" Height="44" Click="appBarButtonRight_Click" />
+        </StackPanel>
+
+        <ListView x:Name="listViewStatusMessages"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Top"
+            ItemsSource="{x:Bind StatusMessagesPageViewModel.StatusMessages, Mode=OneWay}"
+            SelectionMode="None" FontSize="16">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="vm:StatusMessageLstVwItem">
+                <StackPanel Orientation="Horizontal">
+                        <Image Width="25" Height="25" Source="{x:Bind MsgContext, Mode=OneWay, Converter={StaticResource ImageConverter}}" Stretch="UniformToFill" />
+                    <TextBlock Text="{x:Bind Message}" TextWrapping="WrapWholeWords" FontSize="22" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Margin" Value="0,-8,0,-8"/>
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+    </Grid>
+</Page>

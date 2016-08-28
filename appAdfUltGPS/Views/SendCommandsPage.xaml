@@ -1,0 +1,107 @@
+﻿<Page
+    x:Class="appAdfUltGPS.Views.SendCommandsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:appAdfUltGPS.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"  Width="800" Height="480">
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <!-- <SlideNavigationTransitionInfo/>  -->
+                    <CommonNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition FromHorizontalOffset="480" />
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0,0" Stroke="Black" Grid.RowSpan="2" d:LayoutOverrides="TopPosition, BottomPosition">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF00FFD1"/>
+                    <GradientStop Color="#FF0456FB" Offset="0.937"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <TextBlock  Grid.Row="0" Grid.RowSpan="1"
+    		Grid.Column="0" Grid.ColumnSpan="3"
+    		HorizontalAlignment="Center" Text="Send Commands" Margin="0,5,0,0" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" />
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,5,5,5" Orientation="Horizontal" HorizontalAlignment="Left" >
+            <AppBarButton x:Name="appBarButtonLeft" HorizontalAlignment="Left" Icon="Back" Label="" VerticalAlignment="Center" Width="44" Height="45" Click="appBarButtonLeft_Click"/>
+            <TextBlock Text="Course &amp; Speed" Style="{ThemeResource SubheaderTextBlockStyle}" Margin="0,0,0,0" VerticalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="2" Margin="5,5,20,5" Orientation="Horizontal" HorizontalAlignment="Right" Width="Auto">
+            <TextBlock Text="Status Messages" Style="{ThemeResource SubheaderTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,0,0" />
+            <AppBarButton x:Name="appBarButtonRight" HorizontalAlignment="Left" Icon="Forward" Label="" VerticalAlignment="Center" Width="45" Height="44" Click="appBarButtonRight_Click" />
+        </StackPanel>
+
+        <Grid Grid.Row="2" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Text="Send Pre-Built Command Sentence:" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="5,5,0,5" />
+            <Button Grid.Row="1" Grid.Column="0"   x:Name="buttonTestPacket" Content="Test Packet" Click="{x:Bind SendCommandsPageViewModel.buttonTestPacket_Clicked}" Margin="15,5,15,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <Button Grid.Row="1" Grid.Column="1"   x:Name="buttonAntStsON" Content="Ant. Sts. ON" Click="{x:Bind SendCommandsPageViewModel.buttonAntStsON_Clicked}" Margin="15,5,15,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <Button Grid.Row="1" Grid.Column="2"   x:Name="buttonAntStsOFF" Content="Ant. Sts. OFF" Click="{x:Bind SendCommandsPageViewModel.buttonAntStsOFF_Clicked}" Margin="15,5,15,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <Button Grid.Row="1" Grid.Column="3"   x:Name="buttonFirmwareRelease" Content="Firmware" Click="{x:Bind SendCommandsPageViewModel.buttonFirmwareRelease_Clicked}" Margin="15,5,15,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <Button Grid.Row="1" Grid.Column="4"   x:Name="buttonLocusStatus" Content="Locus Sts." Click="{x:Bind SendCommandsPageViewModel.buttonLocusStatus_Clicked}" Margin="15,5,15,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Text="Send Custom Command Sentence:" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="5,5,0,5" />
+            <Button  x:Name="buttonCustomPacket" Grid.Row="3" Content="Send Custom" Margin="10,5,10,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <TextBox x:Name="textBoxCustomPacket" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="6" HorizontalAlignment="Stretch" Margin="15,5,15,5" TextWrapping="Wrap" Text="$PMTK000*32" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Text="Command Response:" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="5,5,0,5" />
+            <ListView x:Name="listViewResponsePacket"  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" 
+                ItemsSource="{x:Bind  SendCommandsPageViewModel.CommandResponses, Mode=OneWay}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Margin" Value="0,-8,0,-8"/>
+                        <Setter Property="Padding" Value="0"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <StackPanel Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="3" Margin="0,5,5,5" Orientation="Horizontal" HorizontalAlignment="left" Width="Auto">
+                <TextBlock Text="Message Count:" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,5,0" />
+                <TextBlock Text="{x:Bind SendCommandsPageViewModel.MessageCount, Mode=OneWay}" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,0,0" />
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Page>

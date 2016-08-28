@@ -1,0 +1,96 @@
+﻿<Page
+    x:Class="appAdfUltGPS.Views.CourseAndSpeedPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:appAdfUltGPS.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"  Width="800" Height="480">
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <!-- <SlideNavigationTransitionInfo/>  -->
+                    <CommonNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition FromHorizontalOffset="480" />
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0,0" Stroke="Black" Grid.RowSpan="2" d:LayoutOverrides="TopPosition, BottomPosition">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0.008"/>
+                    <GradientStop Color="#FF9D9EA0" Offset="0.937"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <TextBlock  Grid.Row="0" Grid.RowSpan="1"
+    		Grid.Column="0" Grid.ColumnSpan="3"
+    		HorizontalAlignment="Center" Text="Course &amp; Speed" Margin="0,5,0,0" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" />
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,5,5,5" Orientation="Horizontal" HorizontalAlignment="Left" >
+            <AppBarButton x:Name="appBarButtonLeft" HorizontalAlignment="Left" Icon="Back" Label="" VerticalAlignment="Center" Width="44" Height="45" Click="appBarButtonLeft_Click"/>
+            <TextBlock Text="Min. Navigation" Style="{ThemeResource SubheaderTextBlockStyle}" Margin="0,0,0,0" VerticalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="2" Margin="5,5,20,5" Orientation="Horizontal" HorizontalAlignment="Right" Width="Auto">
+            <TextBlock Text="Send Commands" Style="{ThemeResource SubheaderTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,0,0" />
+            <AppBarButton x:Name="appBarButtonRight" HorizontalAlignment="Left" Icon="Forward" Label="" VerticalAlignment="Center" Width="45" Height="44" Click="appBarButtonRight_Click" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="10,5,5,10" Orientation="Horizontal" HorizontalAlignment="left" Width="Auto">
+            <TextBlock Text="Course (True):" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,10,0" />
+            <TextBlock Text="{x:Bind CourseAndSpeedPageViewModel.Course_true, Mode=OneWay}" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,00,0" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="2" Margin="10,5,5,10" Orientation="Horizontal" HorizontalAlignment="left" Width="Auto">
+            <TextBlock Text="Speed (kn):" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,10,0" />
+            <TextBlock Text="{x:Bind CourseAndSpeedPageViewModel.Speed_kn, Mode=OneWay}" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,00,0" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="0" Margin="10,5,5,10" Orientation="Horizontal" HorizontalAlignment="left" Width="Auto">
+            <TextBlock Text="Course (Mag.):" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,10,0" />
+            <TextBlock Text="{x:Bind CourseAndSpeedPageViewModel.Course_magnetic, Mode=OneWay}" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,00,0" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="2" Margin="10,5,5,10" Orientation="Horizontal" HorizontalAlignment="left" Width="Auto">
+            <TextBlock Text="Speed (kmh):" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,10,0" />
+            <TextBlock Text="{x:Bind CourseAndSpeedPageViewModel.Speed_kmh, Mode=OneWay}" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,00,0" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="0" Margin="10,5,5,10" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="left" Width="Auto">
+            <TextBlock Text="Mode:" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,10,0" />
+            <TextBlock Text="{x:Bind CourseAndSpeedPageViewModel.Mode, Mode=OneWay}" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,00,0" />
+        </StackPanel>
+        
+        <StackPanel Grid.Row="5" Grid.Column="2" Margin="10,5,5,10" Orientation="Horizontal" HorizontalAlignment="left" Width="Auto">
+            <TextBlock Text="Message Count:" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,10,0" />
+            <TextBlock Text="{x:Bind CourseAndSpeedPageViewModel.MessageCount, Mode=OneWay}" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center"  Margin="0,0,00,0" />
+        </StackPanel>
+
+    </Grid>
+</Page>
